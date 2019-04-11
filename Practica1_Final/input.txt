@@ -1,0 +1,25 @@
+%% PARTE 1
+%% Apartado A
+%% Los comentarios son una prueba de que funciona
++5;
+-5;
+27+15;
+
+%% Apartado B
+%% Real
+5.0;
+%% Octal
+5.3 + 11o;
+%% Exponencial
+
+%% PARTE 2
+%% Reconocedor Sintáctico
+exp(2,2);
+log(2);
+sin(45);
+cos(90);
+
+%% PARTE 3
+%% Apartado A
+INF + 1;
+
