@@ -10,21 +10,21 @@ public interface sym {
   /* terminals */
   public static final int MINUS = 4;
   public static final int UMINUS = 5;
-  public static final int SIN = 10;
+  public static final int SIN = 11;
   public static final int NUMBER = 16;
-  public static final int EXPONENTIAL = 12;
+  public static final int EXPONENTIAL = 13;
   public static final int SEMI = 2;
-  public static final int EQUAL = 14;
-  public static final int COS = 11;
+  public static final int COS = 12;
   public static final int EOF = 0;
   public static final int PLUS = 3;
+  public static final int DIV = 7;
   public static final int INF = 15;
-  public static final int COMMA = 13;
+  public static final int COMMA = 14;
   public static final int error = 1;
-  public static final int RPAREN = 8;
+  public static final int RPAREN = 9;
   public static final int TIMES = 6;
-  public static final int LPAREN = 7;
-  public static final int LOG = 9;
+  public static final int LPAREN = 8;
+  public static final int LOG = 10;
   public static final String[] terminalNames = new String[] {
   "EOF",
   "error",
@@ -33,6 +33,7 @@ public interface sym {
   "MINUS",
   "UMINUS",
   "TIMES",
+  "DIV",
   "LPAREN",
   "RPAREN",
   "LOG",
@@ -40,7 +41,6 @@ public interface sym {
   "COS",
   "EXPONENTIAL",
   "COMMA",
-  "EQUAL",
   "INF",
   "NUMBER"
   };

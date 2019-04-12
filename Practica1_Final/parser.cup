@@ -31,7 +31,7 @@ init with {:
 scan with {: return lexer.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal            SEMI, PLUS, MINUS, UMINUS, TIMES, LPAREN, RPAREN, LOG, SIN, COS, EXPONENTIAL, COMMA, EQUAL, INF;
+terminal            SEMI, PLUS, MINUS, UMINUS, TIMES, DIV, LPAREN, RPAREN, LOG, SIN, COS, EXPONENTIAL, COMMA, INF;
 terminal Double    NUMBER;        // our scanner provides numbers as double
 
 /* Non terminals */
@@ -39,7 +39,7 @@ non terminal            expr_list;
 non terminal Double    expr;      // used to store evaluated subexpressions
 
 /* Precedences */
-precedence left PLUS, MINUS, COMMA, EQUAL, INF;
+precedence left PLUS, MINUS, COMMA, INF, DIV;
 precedence left TIMES;
 precedence left UMINUS;
 
@@ -52,6 +52,7 @@ expr_list ::= expr_list expr:e SEMI         {: System.out.println(e); :}
 expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;        :}
              | expr:e1 MINUS expr:e2        {: RESULT = e1-e2;        :}
              | expr:e1 TIMES expr:e2        {: RESULT = e1*e2;        :}
+             | expr:e1 DIV expr:e2        {: RESULT = e1/e2;        :}
              | MINUS expr:e                 {: RESULT = -e;           :}
              
              /* Modificaciones avanzadas */

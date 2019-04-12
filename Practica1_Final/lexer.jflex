@@ -60,15 +60,18 @@ Whitespace = [ \t\f] | {Newline}
 
 /* EJERCICIO 1 */
 /* APARTADO A */
-Comment = "%%" {CommentContent} {Newline}?
+Comment = "%" {CommentContent} {Newline}?
 CommentContent = (.)*
+/* APARTADO B */
+Exponential = [0-9]*e+[+-]?[0-9]
+Octal=[0-9]+o
 
 /*APARTADO B*/
 dot = "."
 Entero  = ([1-9][0-9]*) | 0 
 Real = [0-9]* {dot} [0-9]+
-Octal=[0-9]+o
-Exponential = [0-9]*e+[+-]+[0-9]
+
+
 
 
 /* EJERCICIO 2 */
@@ -103,11 +106,16 @@ ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
   "("          { return symbolFactory.newSymbol("LPAREN", LPAREN); }
   ")"          { return symbolFactory.newSymbol("RPAREN", RPAREN); }
   ","		   { return symbolFactory.newSymbol("COMMA", COMMA); }
-  "="		   { return symbolFactory.newSymbol("EQUAL", EQUAL); }  
+  "/"          { return symbolFactory.newSymbol("DIV", DIV); } 
   "INF"        { return symbolFactory.newSymbol("INF",INF); }
-  {Exponential} { 
-  					System.out.println("Hola");
-  					return symbolFactory.newSymbol("NUMBER", NUMBER, (double)  Integer.parseInt(yytext().replace("e",""))); }
+  {Exponential} { 			
+					String[] parts = yytext().split("e");
+					String part1 = parts[0];
+					String part2 = parts[1];
+					double parte0 = Double.parseDouble(parts[0]);
+					double parte1 = Double.parseDouble(parts[1]);
+					double total = parte0*(Math.pow(10,parte1));
+  					return symbolFactory.newSymbol("NUMBER", NUMBER, total); }
   {Comment}    {							  }
   {Real}	   { return symbolFactory.newSymbol("NUMBER", NUMBER, Double.parseDouble(yytext())); }
   {Entero}	   { return symbolFactory.newSymbol("NUMBER", NUMBER, Double.parseDouble(yytext())); }	
