@@ -13,6 +13,7 @@ import java.io.FileInputStream;
 
 parser code {:
   protected Lexer lexer;
+  Double mVariable = 0.0;
 :}
 
 /* define how to connect to the scanner! */
@@ -31,15 +32,17 @@ init with {:
 scan with {: return lexer.next_token(); :};
 
 /* Terminals (tokens returned by the scanner). */
-terminal            SEMI, PLUS, MINUS, UMINUS, TIMES, DIV, LPAREN, RPAREN, LOG, SIN, COS, EXPONENTIAL, COMMA, INF;
-terminal Double    NUMBER;        // our scanner provides numbers as double
+terminal            SEMI, PLUS, MINUS, UMINUS, TIMES, DIV, LPAREN, RPAREN, LOG, SIN, COS, EXPONENTIAL, COMMA, MEM, EQUAL;
+terminal Double    	NUMBER;        // our scanner provides numbers as double
+
 
 /* Non terminals */
 non terminal            expr_list;
-non terminal Double    expr;      // used to store evaluated subexpressions
+non terminal Double   	expr;      // used to store evaluated subexpressions
+
 
 /* Precedences */
-precedence left PLUS, MINUS, COMMA, INF, DIV;
+precedence left PLUS, MINUS, COMMA, DIV, EQUAL;
 precedence left TIMES;
 precedence left UMINUS;
 
@@ -48,15 +51,21 @@ precedence left UMINUS;
 expr_list ::= expr_list expr:e SEMI         {: System.out.println(e); :}
             | expr:e SEMI                   {: System.out.println(e); :}
             ;
+      
+            
             
 expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;        :}
              | expr:e1 MINUS expr:e2        {: RESULT = e1-e2;        :}
              | expr:e1 TIMES expr:e2        {: RESULT = e1*e2;        :}
-             | expr:e1 DIV expr:e2        {: RESULT = e1/e2;        :}
+             | expr:e1 DIV expr:e2        	{: RESULT = e1/e2;        :}
              | MINUS expr:e                 {: RESULT = -e;           :}
+             |  MEM			   				{: RESULT = mVariable;        	:}
+             |	MEM EQUAL expr:e			{: mVariable=e; 
+                                      			System.out.print("MEM=");
+                                      			RESULT = mVariable; :}
              
              /* Modificaciones avanzadas */
-			 | INF PLUS expr:e					{: System.out.print(" INF ");	 :}
+			 
              
              /* Aceptar PLUS al principio de un entero */
              | PLUS expr:e                 {: RESULT = e;           :}

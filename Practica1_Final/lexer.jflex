@@ -81,7 +81,7 @@ log= "log"
 sin= "sin"
 
 /* EJERCICIO 3 */
-
+Mem= "MEM"
 
 
 ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
@@ -107,7 +107,7 @@ ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
   ")"          { return symbolFactory.newSymbol("RPAREN", RPAREN); }
   ","		   { return symbolFactory.newSymbol("COMMA", COMMA); }
   "/"          { return symbolFactory.newSymbol("DIV", DIV); } 
-  "INF"        { return symbolFactory.newSymbol("INF",INF); }
+
   {Exponential} { 			
 					String[] parts = yytext().split("e");
 					String part1 = parts[0];
@@ -124,6 +124,8 @@ ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
   {sin}	       { return symbolFactory.newSymbol("SIN", SIN); }
   {cos}		   { return symbolFactory.newSymbol("COS", COS); }
   {log}		   { return symbolFactory.newSymbol("LOG", LOG); }  
+  {Mem}		   { return symbolFactory.newSymbol("MEM", MEM); }
+  "="		   { return symbolFactory.newSymbol("EQUAL", EQUAL); }  
 }
 
 

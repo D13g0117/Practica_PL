@@ -23,5 +23,6 @@ cos(90);
 
 % PARTE 3
 % Apartado A
+5 * +3 - 80/10
 
 
