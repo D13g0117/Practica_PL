@@ -55,7 +55,7 @@ expr      ::= expr:e1 PLUS  expr:e2         {: RESULT = e1+e2;        :}
              | MINUS expr:e                 {: RESULT = -e;           :}
              
              /* Modificaciones avanzadas */
-			 | INF PLUS expr:e					{: System.out.print(" INF ");	        :}
+			 | INF PLUS expr:e					{: System.out.print(" INF ");	 :}
              
              /* Aceptar PLUS al principio de un entero */
              | PLUS expr:e                 {: RESULT = e;           :}

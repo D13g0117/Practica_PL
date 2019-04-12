@@ -11,6 +11,7 @@
 %% Octal
 5.3 + 11o;
 %% Exponencial
+3e-3;
 
 %% PARTE 2
 %% Reconocedor Sintáctico
@@ -21,5 +22,5 @@ cos(90);
 
 %% PARTE 3
 %% Apartado A
-INF + 1;
+
 

@@ -68,6 +68,8 @@ dot = "."
 Entero  = ([1-9][0-9]*) | 0 
 Real = [0-9]* {dot} [0-9]+
 Octal=[0-9]+o
+Exponential = [0-9]*e+[+-]+[0-9]
+
 
 /* EJERCICIO 2 */
 exp= "exp"
@@ -103,6 +105,9 @@ ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
   ","		   { return symbolFactory.newSymbol("COMMA", COMMA); }
   "="		   { return symbolFactory.newSymbol("EQUAL", EQUAL); }  
   "INF"        { return symbolFactory.newSymbol("INF",INF); }
+  {Exponential} { 
+  					System.out.println("Hola");
+  					return symbolFactory.newSymbol("NUMBER", NUMBER, (double)  Integer.parseInt(yytext().replace("e",""))); }
   {Comment}    {							  }
   {Real}	   { return symbolFactory.newSymbol("NUMBER", NUMBER, Double.parseDouble(yytext())); }
   {Entero}	   { return symbolFactory.newSymbol("NUMBER", NUMBER, Double.parseDouble(yytext())); }	
@@ -110,8 +115,7 @@ ident = ([:jletter:] | "_" ) ([:jletterdigit:] | [:jletter:] | "_" )*
   {exp}		   { return symbolFactory.newSymbol("EXPONENTIAL", EXPONENTIAL);}
   {sin}	       { return symbolFactory.newSymbol("SIN", SIN); }
   {cos}		   { return symbolFactory.newSymbol("COS", COS); }
-  {log}		   { return symbolFactory.newSymbol("LOG", LOG); }
-  
+  {log}		   { return symbolFactory.newSymbol("LOG", LOG); }  
 }
 
 
